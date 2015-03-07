@@ -44,9 +44,11 @@ function readFolder($baseUrl)
 		$fileList[] = $baseUrl;
 	return $fileList;
 }
+
 // Retourne un tableau avec les dossiers et fichiers dans l'ordre de l'architecture
 $filesList = readFolder($assetsBaseUrl);
 
+// Si le json des assets n'existe pas ou si une modification a été faite, on réécrit le json
 if(!file_exists($jsonAssetsUrl) || ($mostRecentFile > filemtime($jsonAssetsUrl)))
 {
 	file_put_contents("assets.json", str_replace("\\/", "/",json_encode($filesList, JSON_PRETTY_PRINT)));
